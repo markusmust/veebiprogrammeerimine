@@ -30,6 +30,7 @@
   <body>
   <h1><?php echo $firstName ." " .$lastName; ?></h1>
   <?php echo "tänane kuupäev on: " . $dateToday . "."; ?>
+  <?php echo "<p>Lehe avamise hetkel oli kell " .date("H.i.s") .", käes oli " .$partofDay ."."; ?>
   <p></p>
   <?php echo " Lehe avamise hetkel oli " .$partofDay ."."; ?>
   <p>See on minu <a href="https://www.tlu.ee/">TLÜ</a> õppetöö raames  valminud veebileht ja ei oma mingisugust, mõtestatud või muul moel väärtuslikku sisu</p>
