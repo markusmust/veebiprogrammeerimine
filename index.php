@@ -31,7 +31,7 @@
   <h1><?php echo $firstName ." " .$lastName; ?></h1>
   <?php echo "tänane kuupäev on: " . $dateToday . ". \n"; ?>
   <?php echo "<p>Lehe avamise hetkel oli kell " .date("H.i.s") .", käes oli " .$partofDay .".</p> \n"; ?>
-  <p>See on minu <a href="https://www.tlu.ee/">TLÜ</a> õppetöö raames valminud veebileht ja ei oma mingisugust, mõtestatud või muul moel väärtuslikku sisu</p>
+  <p>See on minu <a href="https://www.tlu.ee/">TLÜ</a> õppetöö raaames valminud veebileht ja ei oma mingisugust, mõtestatud või muul moel väärtuslikku sisu</p>
   <img src="../tlu_terra_600x400_2.jpg" alt="TLÜ Terra õppehoone">
   <p>Minu sõber teeb ka <a href="../../~jaagala" target=blank>veebi</a></p>
   </body>
