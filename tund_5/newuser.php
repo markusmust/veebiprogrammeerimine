@@ -59,7 +59,16 @@
 			 //echo $birthDate;
 		 }  else {
 			 $birthDateError = " Kahjuks on sisestatud võimatu kuupäev";
-		 }		 
+		 }	
+		 
+		//parooli pikkuse kontroll
+		if(strlen($_POST["password"]) >= 8){
+			$password = test_input($_POST["password"]);
+		} else {
+			$passwordError = "Parool peab olema vähemalt 8 tähemärki!";
+		}
+				
+	
 	   }//kõik kontrollid tehtud
 	   if(empty($firstNameError) and empty($lastNameError) and empty($birthMonthError) and empty($birthYearError) and empty($birthDayError) and  empty($birthdateError) and empty($genderError) and empty($emailError) and empty($passwordError)){
 		$notice = signup($firstName, $lastName, $birthDate, $gender, $_POST["email"], $_POST["password"]);
@@ -132,7 +141,8 @@
 	  <label>E-postiaadress (kasutajatunnuseks): </label><br>
 	  <input type="email" name="email" value="<?php echo $email ; ?>"><span><?php echo $emailError ; ?></span><br>
       <label>Salasõna (min 8 märki): </label><br>
-      <input type="password" name="password"><br>
+      <input type="password" name="password">
+	  <br>
 	  
 	  <input type="submit" name="submitUserdata" value="loo kasutaja">
 		</form>
