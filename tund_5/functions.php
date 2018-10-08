@@ -15,7 +15,7 @@
 		if ($stmt->execute()){
 		  $notice = 'kasutaja on edukalt loodud!';
 		} else {
-			$notice = "kasutaja loomisel tekkis tõrge: " .$stmt->error;  
+			$notice = "kasutaja loomisel tekkis tõrge: " .$stmt->error;
 		}
 		$stmt->close();	
 		$mysqli->close();

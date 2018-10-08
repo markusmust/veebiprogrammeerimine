@@ -7,10 +7,9 @@
   $birthMonth = null;
   $birthYear = null;
   $birthDay = null;
-  $birthdate = "";
+  $birthDate = "";
   $gender = null;
   $email = "";
-  
   $monthNamesET = ["jaanuar", "veebruar", "märts", "aprill", "mai", "juuni","juuli", "august", "september", "oktoober", "november", "detsember"];
   
   $firstNameError = "";
@@ -18,7 +17,7 @@
   $birthMonthError = "";
   $birthYearError = "";
   $birthDayError = "";
-  $birthdateError = "";
+  $birthDateError = "";
   $genderError = "";
   $emailError = "";
   $passwordError = "";
@@ -32,17 +31,17 @@
 			  $firstNameError = " Palun sisesta oma eesnimi!";
 		  }
 	// perenime kontroll	  
-  if(isset($_POST["lastname"]) and !empty($_POST["lastname"])){
-		$lastName = test_input($_POST["lastname"]);
-		  }else {
-			  $lastNameError = " Palun sisesta oma perenimi!";
-		  }
-	//emaili kontroll	  
-  if(isset($_POST["email"]) and !empty($_POST["email"])){
-		$email = test_input($_POST["email"]);
-		  }else {
-			  $emailError = " Palun sisesta oma email!";
-		  }
+      if(isset($_POST["lastname"]) and !empty($_POST["lastname"])){
+            $lastName = test_input($_POST["lastname"]);
+              }else {
+                  $lastNameError = " Palun sisesta oma perenimi!";
+              }
+        //emaili kontroll
+      if(isset($_POST["email"]) and !empty($_POST["email"])){
+            $email = test_input($_POST["email"]);
+              }else {
+                  $emailError = " Palun sisesta oma email!";
+              }
 		  
 		  //soo kontroll
 		  if(isset($_POST["gender"]) and !empty($_POST["gender"])){
@@ -51,29 +50,28 @@
 			  $genderError = " Palun märgi oma sugu";
 			}
 	   if(!empty($_POST["birthDay"]) and !empty($_POST["birthMonth"]) and !empty($_POST["birthYear"])) {
-		 if(checkdate(intval($_POST["birthMonth"]), intval($_POST["birthDay"]), intval($_POST["birthYear"]))){
-			 //kontrollime kuupäeva valiidsust, checkdate ootab 3 täisarvu(kuu,päev,aasta)
-			 $birthDate = date_create($_POST["birthMonth"] ."/". $_POST["birthDay"] ."/". $_POST["birthYear"]);
-			 //vormindame andmebaasi jaoks sobivaks
-			 $birthDate = date_format($birthDate, "Y-m-d");
-			 //echo $birthDate;
-		 }  else {
-			 $birthDateError = " Kahjuks on sisestatud võimatu kuupäev";
-		 }	
-		 
-		//parooli pikkuse kontroll
-		if(strlen($_POST["password"]) >= 8){
+           if (checkdate(intval($_POST["birthMonth"]), intval($_POST["birthDay"]), intval($_POST["birthYear"]))) {
+               //kontrollime kuupäeva valiidsust, checkdate ootab 3 täisarvu(kuu,päev,aasta)
+               $birthDate = date_create($_POST["birthMonth"] . "/" . $_POST["birthDay"] . "/" . $_POST["birthYear"]);
+               //vormindame andmebaasi jaoks sobivaks
+               $birthDate = date_format($birthDate, "Y-m-d");
+               echo $birthDate;
+           }else{
+               $birthDateError = " Kahjuks on sisestatud võimatu kuupäev";
+           }
+           }else{
+               $birthDateError = " Palun vali kõik kuupäeva lahtrid";
+           }
+		//parooli pikkuse ja lahtri tühjuse kontroll
+		if(strlen($_POST["password"]) >= 8 or !empty($_POST["password"])){
 			$password = test_input($_POST["password"]);
 		} else {
-			$passwordError = "Parool peab olema vähemalt 8 tähemärki!";
+			$passwordError = "Palun sisesta korrektne parool(min 8 märki)";
 		}
-				
-	
-	   }//kõik kontrollid tehtud
+       }//kõik kontrollid tehtud
 	   if(empty($firstNameError) and empty($lastNameError) and empty($birthMonthError) and empty($birthYearError) and empty($birthDayError) and  empty($birthdateError) and empty($genderError) and empty($emailError) and empty($passwordError)){
-		$notice = signup($firstName, $lastName, $birthDate, $gender, $_POST["email"], $_POST["password"]);
-	   }
-  }//kotrolli lõpp
+		$notice = signup($firstName, $lastName, $birthDate, $gender, $_POST["email"], $_POST["password"]);}
+  //kontrolli lõpp
 ?>
 <!DOCTYPE html>
 <html>
@@ -139,9 +137,10 @@
 	  <span><?php echo $genderError; ?></span>
 	  <br>
 	  <label>E-postiaadress (kasutajatunnuseks): </label><br>
-	  <input type="email" name="email" value="<?php echo $email ; ?>"><span><?php echo $emailError ; ?></span><br>
+	  <input type="email" name="email" value="<?php echo $email ; ?>"><span><?php echo $emailError ; ?></span>
+      <br>
       <label>Salasõna (min 8 märki): </label><br>
-      <input type="password" name="password">
+      <input type="password" name="password"><span><?php echo $passwordError ; ?></span>
 	  <br>
 	  
 	  <input type="submit" name="submitUserdata" value="loo kasutaja">
