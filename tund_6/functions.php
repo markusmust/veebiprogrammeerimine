@@ -5,10 +5,41 @@
 	
 	//kasutan sessiooni
 	session_start();
-	
+
+    function allvalidmessages(){
+		$notice = "";
+        $accepted = 1;
+        $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"],   $GLOBALS["serverPassword"], $GLOBALS["database"]);
+        $stmt = $mysqli->prepare("SELECT message FROM vpamsg WHERE accepted = ?");
+        echo $mysqli->error;
+        $stmt->bind_param("i",$accepted);
+		$stmt->bind_result($msg);
+        if($stmt->execute()){
+			while($stmt->fetch()){
+				$notice .="<li>" .$msg .'<br>' ."\n";
+			}
+		}else{
+			$notice .= "<li>Sõnumite lugemisel tekkis viga!" .$stmt->error ."</li> \n";
+		}
+		$notice .= "</ul> \n";
+		$stmt->close();	
+		$mysqli->close();
+		return $notice;
+    }
+
 	//SQL käsk andmete uuendamiseks
 	//UPDATE vpamsg SET acceptedby=?, accepted=?, accepttime=now() WHERE if=?
-	
+	function validatemessage($id, $validation){
+	$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
+	$stmt = $mysqli->prepare("UPDATE vpamsg SET acceptedby=?, accepted=?, accepttime=now() WHERE id=?");
+	echo $mysqli->error;
+	$stmt->bind_param("iii", $_SESSION["userId"], $validation, $id);
+	$stmt->execute();
+	$stmt->close();
+	$mysqli->close();
+	header("Location: validatemsg.php");
+	exit();
+	}
 	//valitud sõnumi lugemine valideerimiseks
 	function readmsgforvalidation($editId){
 		$notice = "";
