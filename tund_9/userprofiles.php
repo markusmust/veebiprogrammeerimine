@@ -34,6 +34,7 @@
     if($myprofile->txtcolor != ""){
 	  $mytxtcolor = $myprofile->txtcolor;
     }
+	
   }
 ?>
 <!DOCTYPE html>
@@ -71,6 +72,13 @@
 	  <br>
 	  <label>Minu valitud taustavärv: </label><input name="bgcolor" type="color" value="<?php echo $mybgcolor; ?>"><br>
 	  <label>Minu valitud tekstivärv: </label><input name="txtcolor" type="color" value="<?php echo $mytxtcolor; ?>"><br>
+	  <hr>
+	  
+	  <label>Lae üles uus profiilipilt:</label>
+		<input type="file" name="profilePic" id="profilePic">
+		<br>
+	    <image src="" alt="profiilipilt">
+	  <hr>
 	  <input name="submitProfile" type="submit" value="Salvesta profiil">
 	</form>
 </body>
