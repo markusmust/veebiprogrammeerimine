@@ -17,8 +17,8 @@
 			
 			
 		public function __destruct(){
-			imagedestory($this->myTempImage);
-			imagedestory($this->myImage);
+			imagedestroy($this->myTempImage);
+			imagedestroy($this->myImage);
 		}
 		
 		private function imageFromFile(){
@@ -27,10 +27,10 @@
 				$this->myTempImage = imagecreatefromjpeg($this->tempName);
 			}
 			if($this->imageFileType == "png"){
-				$this->myTempImage = imagecreatefromjpeg($this->tempName);
+				$this->myTempImage = imagecreatefrompng($this->tempName);
 			}
 			if($this->imageFileType == "gif"){
-				$this->myTempImage = imagecreatefromjpeg($this->tempName);
+				$this->myTempImage = imagecreatefromgif($this->tempName);
 			}
 		}
 		
@@ -64,7 +64,7 @@
 			$waterMarkPosX = imagesx($this->myImage) - $waterMarkWidth - 10;
 			$waterMarkPosY = imagesy($this->myImage) - $waterMarkHeight - 10;
 			
-			imagecopy($myImage, $waterMark, $waterMarkPosX, $waterMarkPosY, 0, 0, $waterMarkWidth, $waterMarkHeight);
+			imagecopy($this->myImage, $waterMark, $waterMarkPosX, $waterMarkPosY, 0, 0, $waterMarkWidth, $waterMarkHeight);
 		}
 		
 		public function addText(){
@@ -84,20 +84,22 @@
 					$notice = 0;
 				}
 			}
-			if($imageFileType == "png"){
+			if($this->imageFileType == "png"){
 				if(imagepng($this->myImage, $target_file, 6)){
 					$notice = 1;
 			} else {
 				$notice = 0;
-			}
-			if($imageFileType == "gif"){
-				if(imagepng($this->myImage, $target_file)){
-					$notice = 1;
-			} else {
-				$notice = 0;
-						}
 				}
 			}
+			
+			if($this->imageFileType == "gif"){
+				if(imagegif($this->myImage, $target_file)){
+					$notice = 1;
+			} else {
+					$notice = 0;
+					}
+			}
+		return $notice;
 		}
 		
 	}//class lõppeb

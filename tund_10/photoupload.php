@@ -72,14 +72,14 @@
 	// if everything is ok, try to upload file
 	} else {
 		
-		$myPhoto = new Photoupload($FILES["fileToUpload"]["tmp_name"], $imageFileType);
+		$myPhoto = new Photoupload($_FILES["fileToUpload"]["tmp_name"], $imageFileType);
 		$myPhoto->changePhotoSize(600, 400);
 		$myPhoto->addWaterMark();
 		$myPhoto->addText();
 		$savesuccess = $myPhoto->saveFile($target_file);
 		unset($myphoto);
 		
-		if($savesucess == 1){
+		if($savesuccess == 1){
 		addPhotoData($target_file_name, $_POST["altText"], $_POST["privacy"]);	
 		} else {
 			echo "vabandage, faili üles laadimisel tekkis tehniline viga.";
