@@ -60,14 +60,14 @@
 	$privacy = 2;
 	$skip = ($page - 1) * $limit;
     $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
-    $stmt = $mysqli->prepare("SELECT filename, alttext FROM vpphotos WHERE privacy<=? AND deleted IS NULL LIMIT ?,?");
+    $stmt = $mysqli->prepare("SELECT id, filename, alttext FROM vpphotos WHERE privacy<=? AND deleted IS NULL LIMIT ?,?");
     echo $mysqli->error;
     $stmt->bind_param("iii", $privacy, $skip, $limit);
-    $stmt->bind_result($filenameFromDb, $alttextFromDb);
+    $stmt->bind_result($idFromDb, $filenameFromDb, $alttextFromDb);
     $stmt->execute();
     while($stmt->fetch()){
       //<img src="kataloog/fail" alt="tekst">
-      $html .= '<img src="' .$GLOBALS["thumbDir"] .$filenameFromDb .'" alt="' .$alttextFromDb .'" data-fn="' .$filenameFromDb .'">' ."\n";
+      $html .= '<img src="' .$GLOBALS["thumbDir"] .$filenameFromDb .'" alt="' .$alttextFromDb .'" data-fn="' .$filenameFromDb .'" data-id="' .$idFromDb .'">' ."\n";
     }
     if(empty($html)){
       $html = "<p>Kahjuks avalikke pilte pole!</p> \n";

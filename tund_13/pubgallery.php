@@ -16,7 +16,7 @@
   $page = 1;
   $totalImages = findTotalPublicImages();
   //echo $totalImages;
-  $limit = 5;
+  $limit = 10;
   if(!isset($_GET["page"]) or $_GET["page"] < 1){
 	  $page = 1;
   } elseif (round(($_GET["page"] - 1) * $limit) > $totalImages){
@@ -50,6 +50,15 @@
 		<img class="modal-content" id="modalImg">
 		<!-- Modal Caption (Image Text) -->
 		<div id="caption"></div>
+		<div id="raiting" class="caption">
+			<label><input type="radio" name="rating" id="rating1" value="1">1</label>
+			<label><input type="radio" name="rating" id="rating2" value="2">2</label>
+			<label><input type="radio" name="rating" id="rating3" value="3">3</label>
+			<label><input type="radio" name="rating" id="rating4" value="4">4</label>
+			<label><input type="radio" name="rating" id="rating5" value="5">5</label>
+			<input type="button" value="salvesta hinnang!" id="storerating">
+			<span id="avgRating"></span>
+		</div>
 	</div>
 	<div id="gallery">
 	<?php

@@ -9,3 +9,6 @@ CREATE TABLE `if18_markus_mu_1`.`vpusers` ( `id` INT(11) NOT NULL AUTO_INCREMENT
 vpphotos tabel
 CREATE TABLE `if18_markus_mu_1`.`vpphotos` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `userid` INT(11) NOT NULL , `filename` VARCHAR(40) NOT NULL , `alttext` VARCHAR(256) NULL , `privacy` INT(1) NOT NULL , `created` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , `deleted` DATE NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
+piltide hinded tabel
+CREATE TABLE `if18_markus_mu_1`.`vpphotoratings` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `photoid` INT(11) NOT NULL , `userid` INT(11) NOT NULL , `raiting` INT(1) NOT NULL , `added` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+

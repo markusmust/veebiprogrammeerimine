@@ -31,7 +31,7 @@
 }
 
 /* Caption of Modal Image (Image Text) - Same Width as the Image */
-#caption {
+.caption {
     margin: auto;
     display: block;
     width: 80%;

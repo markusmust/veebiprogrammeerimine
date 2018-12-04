@@ -16,6 +16,7 @@
   
   //lehe päise laadimine
   $pageTitle = "Pealeht";
+  $scripts = '<script type="text/javascript" src="javascript/randomphoto.js" defer></script>' . "\n";
   require("header.php");
 ?>
 
@@ -36,6 +37,8 @@
 	  <li>Avalike fotode <a href="pubgallery.php">galerii</a>.</li>
 	  <li>Privaatsete fotode <a href="privategallery.php">galerii</a>.</li>
 	</ul>
-	
+	<hr>
+	<div id="pic">
+	</div>
   </body>
 </html>
